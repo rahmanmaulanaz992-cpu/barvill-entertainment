@@ -4,6 +4,10 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
+    <main className="min-h-screen bg-black text-white flex items-center justify-center">
+      <h1 className="text-6xl font-bold tracking-[0.3em]">
+        BARVILL
+      </h1>
     <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 20 }}

@@ -1,0 +1,131 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+
+export default function CustomCursor() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Cinematic smooth spring damping for luxury feel
+  const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  useEffect(() => {
+    // Check if the device has a fine pointer (mouse/trackpad)
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    setIsDesktop(mediaQuery.matches);
+
+    if (!mediaQuery.matches) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isVisible) setIsVisible(true);
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        target.tagName.toLowerCase() === "a" ||
+        target.tagName.toLowerCase() === "button" ||
+        target.closest("a") ||
+        target.closest("button") ||
+        window.getComputedStyle(target).cursor === "pointer"
+      ) {
+        setIsHovering(true);
+      } else {
+        setIsHovering(false);
+      }
+    };
+
+    const handleMouseLeave = () => {
+      setIsVisible(false);
+    };
+
+    const handleMouseEnter = () => {
+      setIsVisible(true);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseover", handleMouseOver);
+    document.body.addEventListener("mouseleave", handleMouseLeave);
+    document.body.addEventListener("mouseenter", handleMouseEnter);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseover", handleMouseOver);
+      document.body.removeEventListener("mouseleave", handleMouseLeave);
+      document.body.removeEventListener("mouseenter", handleMouseEnter);
+    };
+  }, [mouseX, mouseY, isVisible]);
+
+  if (!isDesktop) return null;
+
+  return (
+    <>
+      {/* Hide the default cursor specifically only when this component mounts on desktop */}
+      <style>{`
+        @media (hover: hover) and (pointer: fine) {
+          * {
+            cursor: none !important;
+          }
+        }
+      `}</style>
+      
+      {/* 1. Immersive Pointer Atmosphere (Soft Ambient Glow) */}
+      <motion.div
+        style={{
+          x: smoothX,
+          y: smoothY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        animate={{
+          scale: isHovering ? 1.5 : 1,
+          opacity: isHovering ? 0.4 : 0.15,
+        }}
+        transition={{ type: "spring", stiffness: 200, damping: 25 }}
+        className="fixed top-0 left-0 w-16 h-16 bg-white rounded-full blur-[15px] pointer-events-none z-[9998] mix-blend-screen"
+      />
+
+      {/* 2. Hover Reactive Ring (Expands & morphs on Links/Buttons) */}
+      <motion.div
+        style={{
+          x: smoothX,
+          y: smoothY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        animate={{
+          scale: isHovering ? 1 : 0.3,
+          opacity: isHovering ? 1 : 0,
+          borderWidth: isHovering ? "1px" : "0px",
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        className="fixed top-0 left-0 w-12 h-12 border-white/40 rounded-full pointer-events-none z-[9999] mix-blend-screen"
+      />
+
+      {/* 3. Core Cursor Dot (Crisp & Minimal) */}
+      <motion.div
+        style={{
+          x: smoothX,
+          y: smoothY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        animate={{
+          scale: isHovering ? 0 : 1,
+          opacity: isHovering ? 0 : 1,
+        }}
+        transition={{ duration: 0.15, ease: "easeOut" }}
+        className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
+      />
+    </>
+  );
+}

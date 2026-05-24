@@ -1,0 +1,3 @@
+components
+ └─ providers
+     └─ SmoothScrollProvider.tsx

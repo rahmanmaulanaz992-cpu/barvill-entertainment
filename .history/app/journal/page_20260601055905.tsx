@@ -84,9 +84,12 @@ export default async function JournalPage() {
               <span className="text-xs md:text-sm font-semibold tracking-widest uppercase text-neutral-300 mb-4">
                 {featuredArticle.category || "Journal"}
               </span>
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white max-w-4xl leading-tight mb-6">
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white max-w-4xl leading-tight mb-6 line-clamp-3">
                 {featuredArticle.title || "Untitled Article"}
               </h2>
+              <p className="text-neutral-400 max-w-2xl text-sm md:text-lg hidden md:block mb-8">
+                {featuredArticle.excerpt || ""}
               <p className="text-neutral-400 max-w-2xl text-sm md:text-lg hidden md:block mb-8 line-clamp-2">
                 {shortExcerpt}
               </p>

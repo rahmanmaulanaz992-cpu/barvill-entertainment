@@ -2,10 +2,13 @@ import Link from "next/link";
 import { NotionJournalArticle } from "@/lib/notion";
 
 export default async function JournalPage() {
+  // Praktik yang lebih aman untuk Vercel: Gunakan VERCEL_URL jika tersedia
   const getBaseUrl = () => {
+    if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
     if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
     if (process.env.VERCEL_PROJECT_PRODUCTION_URL) return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
     if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+    return "http://localhost:3000";
     
     // Fallback localhost HANYA untuk mode development
     if (process.env.NODE_ENV === "development") return "http://localhost:3000";
@@ -13,19 +16,27 @@ export default async function JournalPage() {
     throw new Error("Base URL is not configured. Please set NEXT_PUBLIC_SITE_URL.");
   };
 
+  const baseUrl = getBaseUrl();
   let journalArticles: NotionJournalArticle[] = [];
   let fetchError: string | null = null;
 
   try {
+    // Gunakan URL absolute karena ini Server Component
+    const res = await fetch(`${baseUrl.replace(/\/$/, "")}/api/journal`, {
     const baseUrl = getBaseUrl();
     const res = await fetch(`${baseUrl}/api/journal`, {
       cache: "no-store",
     });
     
+    if (res.ok) {
     if (!res.ok) {
       fetchError = `HTTP Error ${res.status}: ${res.statusText}`;
     } else {
       journalArticles = await res.json();
+      console.log("JUMLAH ARTIKEL:", journalArticles.length);
+      console.log("DATA ARTIKEL:", JSON.stringify(journalArticles, null, 2));
+    } else {
+      console.error(`Failed to fetch journal: ${res.status} ${res.statusText}`);
     }
   } catch (error) {
     console.error("Error fetching journal articles:", error);
@@ -54,6 +65,8 @@ export default async function JournalPage() {
   const latestArticles = publishedArticles.length > 1 ? publishedArticles.slice(1) : [];
 
   return (
+    <main className="pt-32 p-10 text-white">
+      <h1>DEBUG JOURNAL</h1>
     <main className="min-h-screen pt-32 pb-24 px-6 md:px-12 lg:px-24 max-w-[1800px] mx-auto bg-black text-white">
       {/* --- HEADER SECTION --- */}
       <header className="flex flex-col gap-6 max-w-4xl">
@@ -65,6 +78,7 @@ export default async function JournalPage() {
         </p>
       </header>
 
+      <p>Total Artikel: {journalArticles.length}</p>
       {/* --- FEATURED ARTICLE SECTION --- */}
       {featuredArticle && featuredArticle.slug && (
         <section className="mt-16 relative w-full h-[60vh] md:h-[75vh] rounded-2xl overflow-hidden group">
@@ -93,6 +107,9 @@ export default async function JournalPage() {
         </section>
       )}
 
+      <pre>
+        {JSON.stringify(journalArticles, null, 2)}
+      </pre>
       {/* --- LATEST ARTICLES SECTION --- */}
       {latestArticles.length > 0 && (
         <section className="mt-24">

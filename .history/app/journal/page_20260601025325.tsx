@@ -2,6 +2,13 @@ import Link from "next/link";
 import { NotionJournalArticle } from "@/lib/notion";
 
 export default async function JournalPage() {
+  // Tentukan Base URL dengan fallback ke localhost untuk mode development
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  
+  const res = await fetch(`${baseUrl}/api/journal`, {
+    cache: "no-store",
+  });
+  const journalArticles: NotionJournalArticle[] = await res.json();
   // Praktik yang lebih aman untuk Vercel: Gunakan VERCEL_URL jika tersedia
   const getBaseUrl = () => {
     if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
@@ -9,9 +16,15 @@ export default async function JournalPage() {
     return "http://localhost:3000";
   };
 
+  const publishedArticles = journalArticles;
+  const featuredArticle = publishedArticles[0];
+  const latestArticles = publishedArticles.slice(1);
   const baseUrl = getBaseUrl();
   let journalArticles: NotionJournalArticle[] = [];
 
+  console.log(
+    JSON.stringify(journalArticles, null, 2)
+  );
   try {
     // Gunakan URL absolute karena ini Server Component
     const res = await fetch(`${baseUrl.replace(/\/$/, "")}/api/journal`, {
@@ -45,10 +58,13 @@ export default async function JournalPage() {
       </header>
 
       {/* --- FEATURED ARTICLE SECTION --- */}
+      {featuredArticle && (
       {featuredArticle && featuredArticle.slug && (
         <section className="mt-16 relative w-full h-[60vh] md:h-[75vh] rounded-2xl overflow-hidden group">
           <Link href={`/journal/${featuredArticle.slug}`}>
             <img
+              src={featuredArticle.cover}
+              alt={featuredArticle.title}
               src={featuredArticle.cover || "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80"}
               alt={featuredArticle.title || "Featured Article"}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -56,15 +72,19 @@ export default async function JournalPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
             <div className="absolute inset-0 p-8 md:p-16 flex flex-col justify-end">
               <span className="text-xs md:text-sm font-semibold tracking-widest uppercase text-neutral-300 mb-4">
+                {featuredArticle.category}
                 {featuredArticle.category || "Journal"}
               </span>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white max-w-4xl leading-tight mb-6">
+                {featuredArticle.title}
                 {featuredArticle.title || "Untitled Article"}
               </h2>
               <p className="text-neutral-400 max-w-2xl text-sm md:text-lg hidden md:block mb-8">
+                {featuredArticle.excerpt}
                 {featuredArticle.excerpt || ""}
               </p>
               <div className="flex items-center text-xs md:text-sm text-neutral-500 uppercase tracking-widest">
+                <span>{featuredArticle.date}</span>
                 <span>{featuredArticle.date || ""}</span>
               </div>
             </div>
@@ -73,6 +93,12 @@ export default async function JournalPage() {
       )}
 
       {/* --- LATEST ARTICLES SECTION --- */}
+      <section className="mt-24">
+        <div className="mb-12 border-b border-white/10 pb-6">
+          <h3 className="text-2xl md:text-4xl font-bold uppercase tracking-wide text-white">
+            Latest Articles
+          </h3>
+        </div>
       {latestArticles.length > 0 && (
         <section className="mt-24">
           <div className="mb-12 border-b border-white/10 pb-6">
@@ -81,6 +107,9 @@ export default async function JournalPage() {
             </h3>
           </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          {latestArticles.map((article) => (
+            <Link key={article.slug} href={`/journal/${article.slug}`}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
             {latestArticles.map((article) => {
               if (!article || !article.slug) return null;
@@ -89,6 +118,8 @@ export default async function JournalPage() {
               <article className="group cursor-pointer flex flex-col gap-6">
                 <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-white/5">
                   <img
+                    src={article.cover}
+                    alt={article.title}
                       src={article.cover || "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80"}
                       alt={article.title || "Article"}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
@@ -97,17 +128,23 @@ export default async function JournalPage() {
                 </div>
                 <div className="flex flex-col gap-3">
                   <span className="text-xs font-semibold tracking-widest uppercase text-neutral-400">
+                    {article.category}
                       {article.category || "Journal"}
                   </span>
                   <h4 className="text-xl md:text-2xl font-bold text-white group-hover:text-neutral-300 transition-colors leading-snug">
+                    {article.title}
                       {article.title || "Untitled"}
                   </h4>
                   <span className="text-xs text-neutral-500 uppercase tracking-widest mt-1">
+                    {article.date}
                       {article.date || ""}
                   </span>
                 </div>
               </article>
             </Link>
+          ))}
+        </div>
+      </section>
               );
             })}
           </div>

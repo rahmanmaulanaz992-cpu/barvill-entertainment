@@ -72,7 +72,7 @@ export default async function JournalPage() {
 
       {/* --- FEATURED ARTICLE SECTION --- */}
       {featuredArticle && featuredArticle.slug && (
-        <section className="mt-16 relative w-full aspect-video rounded-2xl overflow-hidden group">
+        <section className="mt-16 relative w-full h-[60vh] md:h-[75vh] rounded-2xl overflow-hidden group">
           <Link href={`/journal/${featuredArticle.slug}`}>
             <img
               src={featuredArticle.cover || "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80"}
@@ -80,14 +80,17 @@ export default async function JournalPage() {
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-            <div className="absolute inset-0 p-6 md:p-12 pb-12 md:pb-16 flex flex-col justify-end">
+            <div className="absolute inset-0 p-8 md:p-16 flex flex-col justify-end">
               <span className="text-xs md:text-sm font-semibold tracking-widest uppercase text-neutral-300 mb-4">
+              <span className="text-xs md:text-sm font-semibold tracking-widest uppercase text-neutral-300 mb-6">
                 {featuredArticle.category || "Journal"}
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white max-w-4xl leading-tight mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white max-w-4xl leading-tight mb-6 line-clamp-2">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-3xl leading-tight mb-8 line-clamp-2">
                 {featuredArticle.title || "Untitled Article"}
               </h2>
-              <p className="text-neutral-400 max-w-2xl text-sm md:text-base hidden md:block mb-6 line-clamp-2 leading-relaxed">
+              <p className="text-neutral-400 max-w-2xl text-sm md:text-lg hidden md:block mb-8 line-clamp-2">
+              <p className="text-neutral-400 max-w-2xl text-sm md:text-base hidden md:block mb-10 line-clamp-2 leading-relaxed">
                 {shortExcerpt}
               </p>
               <div className="flex items-center text-xs md:text-sm text-neutral-500 uppercase tracking-widest">

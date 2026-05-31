@@ -72,7 +72,7 @@ export default async function JournalPage() {
 
       {/* --- FEATURED ARTICLE SECTION --- */}
       {featuredArticle && featuredArticle.slug && (
-        <section className="mt-16 relative w-full aspect-video rounded-2xl overflow-hidden group">
+        <section className="mt-16 relative w-full h-[60vh] md:h-[75vh] rounded-2xl overflow-hidden group">
           <Link href={`/journal/${featuredArticle.slug}`}>
             <img
               src={featuredArticle.cover || "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80"}

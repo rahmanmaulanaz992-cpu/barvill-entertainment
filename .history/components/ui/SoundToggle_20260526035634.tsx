@@ -1,47 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function SoundToggle() {
   const [isSoundOn, setIsSoundOn] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    // Mencari elemen audio global yang dirender oleh AmbientAudioWrapper di layout.tsx
-    const audioEl = document.querySelector("audio");
-    
-    if (audioEl) {
-      audioRef.current = audioEl;
-      
-      // Sinkronisasi state React awal dengan state aktual audio
-      setIsSoundOn(!audioEl.paused);
-
-      // Listener agar state selalu sinkron walau audio dipause/play oleh faktor eksternal (misal policy browser)
-      const handlePlay = () => setIsSoundOn(true);
-      const handlePause = () => setIsSoundOn(false);
-
-      audioEl.addEventListener("play", handlePlay);
-      audioEl.addEventListener("pause", handlePause);
-
-      return () => {
-        audioEl.removeEventListener("play", handlePlay);
-        audioEl.removeEventListener("pause", handlePause);
-      };
-    }
-  }, []);
 
   const toggleSound = () => {
-    if (audioRef.current) {
-      if (audioRef.current.paused) {
-        audioRef.current.play().catch((err) => console.error("Audio playback failed:", err));
-      } else {
-        audioRef.current.pause();
-      }
-    } else {
-      // Fallback state jika audio tidak ditemukan
-      setIsSoundOn(!isSoundOn);
-    }
+    setIsSoundOn(!isSoundOn);
+    // Placeholder untuk integrasi audio ambient di masa mendatang
+    // Contoh: audioRef.current.play() / pause()
   };
 
   return (

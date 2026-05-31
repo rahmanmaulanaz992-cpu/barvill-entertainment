@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
@@ -32,6 +33,9 @@ export default function SoundToggle() {
   }, []);
 
   const toggleSound = () => {
+    setIsSoundOn(!isSoundOn);
+    // Placeholder untuk integrasi audio ambient di masa mendatang
+    // Contoh: audioRef.current.play() / pause()
     if (audioRef.current) {
       if (audioRef.current.paused) {
         audioRef.current.play().catch((err) => console.error("Audio playback failed:", err));

@@ -1,0 +1,99 @@
+import Link from "next/link";
+import { NotionJournalArticle } from "@/lib/notion";
+
+export default async function JournalPage() {
+  // Tentukan Base URL dengan fallback ke localhost untuk mode development
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  
+  const res = await fetch(`${baseUrl}/api/journal`, {
+    cache: "no-store",
+  });
+  const journalArticles: NotionJournalArticle[] = await res.json();
+
+  const publishedArticles = journalArticles;
+  const featuredArticle = publishedArticles[0];
+  const latestArticles = publishedArticles.slice(1);
+
+  console.log(
+    JSON.stringify(journalArticles, null, 2)
+  );
+
+  return (
+    <main className="min-h-screen pt-32 pb-24 px-6 md:px-12 lg:px-24 max-w-[1800px] mx-auto">
+      {/* --- HEADER SECTION --- */}
+      <header className="flex flex-col gap-6 max-w-4xl">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase text-white">
+          Barvill Journal
+        </h1>
+        <p className="text-lg md:text-xl text-neutral-400 max-w-2xl">
+          News, updates, releases and stories from Barvill Entertainment.
+        </p>
+      </header>
+
+      {/* --- FEATURED ARTICLE SECTION --- */}
+      {featuredArticle && (
+        <section className="mt-16 relative w-full h-[60vh] md:h-[75vh] rounded-2xl overflow-hidden group">
+          <Link href={`/journal/${featuredArticle.slug}`}>
+            <img
+              src={featuredArticle.cover}
+              alt={featuredArticle.title}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+            <div className="absolute inset-0 p-8 md:p-16 flex flex-col justify-end">
+              <span className="text-xs md:text-sm font-semibold tracking-widest uppercase text-neutral-300 mb-4">
+                {featuredArticle.category}
+              </span>
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white max-w-4xl leading-tight mb-6">
+                {featuredArticle.title}
+              </h2>
+              <p className="text-neutral-400 max-w-2xl text-sm md:text-lg hidden md:block mb-8">
+                {featuredArticle.excerpt}
+              </p>
+              <div className="flex items-center text-xs md:text-sm text-neutral-500 uppercase tracking-widest">
+                <span>{featuredArticle.date}</span>
+              </div>
+            </div>
+          </Link>
+        </section>
+      )}
+
+      {/* --- LATEST ARTICLES SECTION --- */}
+      <section className="mt-24">
+        <div className="mb-12 border-b border-white/10 pb-6">
+          <h3 className="text-2xl md:text-4xl font-bold uppercase tracking-wide text-white">
+            Latest Articles
+          </h3>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          {latestArticles.map((article) => (
+            <Link key={article.slug} href={`/journal/${article.slug}`}>
+              <article className="group cursor-pointer flex flex-col gap-6">
+                <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-white/5">
+                  <img
+                    src={article.cover}
+                    alt={article.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+                  />
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
+                </div>
+                <div className="flex flex-col gap-3">
+                  <span className="text-xs font-semibold tracking-widest uppercase text-neutral-400">
+                    {article.category}
+                  </span>
+                  <h4 className="text-xl md:text-2xl font-bold text-white group-hover:text-neutral-300 transition-colors leading-snug">
+                    {article.title}
+                  </h4>
+                  <span className="text-xs text-neutral-500 uppercase tracking-widest mt-1">
+                    {article.date}
+                  </span>
+                </div>
+              </article>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}

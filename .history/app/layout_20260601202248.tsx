@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false, // Clean up unwanted auto-links on iOS
   },
-  description: "Barvill Entertainment adalah entertainment hub independent yang berfokus pada pengembangan talenta, karya kreatif, artist development, dan ekosystem hiburan digital",
+  description: "Barvill Entertainment adalah entertainment hub independent yang berfokus pada pengembangan talenta, karya kreatif, artist development, dan ekosistem hiburan digital",
   keywords: [
     "Barvill Entertainment",
     "Entertainment Ecosystem",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     "Barvill",
     "Record Label",
     "Creative Community",
-    "Independent Entertainment"
+    "Indenpendent Entertainment"
   ],
   authors: [{ name: "Barvill Entertainment" }],
   creator: "Barvill Entertainment",

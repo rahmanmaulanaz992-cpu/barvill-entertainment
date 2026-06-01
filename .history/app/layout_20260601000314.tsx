@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://barvillentertainment.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://barvill.com"),
   title: {
     default: "Barvill Entertainment — Entertainment Hub",
     template: "%s | Barvill Entertainment",
@@ -35,10 +35,10 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false, // Clean up unwanted auto-links on iOS
   },
-  description: "Barvill Entertainment adalah entertainment hub independent yang berfokus pada pengembangan talenta, karya kreatif, artist development, dan ekosystem hiburan digital",
+  description: "Barvill Entertainment adalah entertainment hub independent yang berfokus pada pengembangan talenta, karya kreatif, artist development, dan ekosistem hiburan digital",
   keywords: [
     "Barvill Entertainment",
-    "Entertainment Ecosystem",
+    "Entertainment Ecosistem",
     "Barbarian Village",
     "Digital Entertainment",
     "Entertainment Hub",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     "Barvill",
     "Record Label",
     "Creative Community",
-    "Independent Entertainment"
+    "Indenpendent Entertainment"
   ],
   authors: [{ name: "Barvill Entertainment" }],
   creator: "Barvill Entertainment",

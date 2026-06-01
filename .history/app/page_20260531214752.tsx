@@ -70,14 +70,6 @@ const CinematicDivider = ({ narrativeText }: { narrativeText?: string }) => (
 );
 
 export default function HomePage() {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Barvill Entertainment",
-    "url": "https://barvillentertainment.com",
-    "logo": "https://barvillentertainment.com/data/logo-barvill.jpg"
-  };
-
   // --- DYNAMIC ARTIST DATA ---
   const safeArtists = Array.isArray(artists) ? artists : [];
   const featuredArtists = safeArtists
@@ -266,12 +258,6 @@ export default function HomePage() {
 
   return (
     <main className="relative w-full bg-black text-white flex flex-col">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schema),
-        }}
-      />
       {/* Global Cinematic Film Grain & Fog Environment */}
 
       {/* Environmental Identity Fragment */}

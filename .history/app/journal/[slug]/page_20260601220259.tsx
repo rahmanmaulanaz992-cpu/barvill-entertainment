@@ -34,33 +34,19 @@ export async function generateMetadata(
     };
   }
 
-  const seoDescription =
-    article.excerpt.length > 160
-      ? article.excerpt.slice(0, 157) + "..."
-      : article.excerpt;
-
   return {
     title: `${article.title} | Barvill Entertainment`,
-    description: seoDescription,
+    description: article.excerpt,
     openGraph: {
-      title: `${article.title} | Barvill Entertainment`,
-      description: seoDescription,
-      url: `${baseUrl}/journal/${encodeURIComponent(article.slug)}`,
-      siteName: "Barvill Entertainment",
+      title: article.title,
+      description: article.excerpt,
+      images: [article.cover],
       type: "article",
-      images: [
-        {
-          url: article.cover,
-          width: 1200,
-          height: 630,
-          alt: article.title,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${article.title} | Barvill Entertainment`,
-      description: seoDescription,
+      title: article.title,
+      description: article.excerpt,
       images: [article.cover],
     },
   };
@@ -69,7 +55,7 @@ export async function generateMetadata(
 export default async function JournalArticlePage({ params }: PageProps) {
   const resolvedParams = await params;
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://barvillentertainment.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const res = await fetch(`${baseUrl}/api/journal`, {
     cache: "no-store",
   });

@@ -69,7 +69,7 @@ export async function generateMetadata(
 export default async function JournalArticlePage({ params }: PageProps) {
   const resolvedParams = await params;
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://barvillentertainment.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const res = await fetch(`${baseUrl}/api/journal`, {
     cache: "no-store",
   });

@@ -41,8 +41,12 @@ export async function generateMetadata(
 
   return {
     title: `${article.title} | Barvill Entertainment`,
+    description: article.excerpt,
     description: seoDescription,
     openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      images: [article.cover],
       title: `${article.title} | Barvill Entertainment`,
       description: seoDescription,
       url: `${baseUrl}/journal/${encodeURIComponent(article.slug)}`,
@@ -59,6 +63,8 @@ export async function generateMetadata(
     },
     twitter: {
       card: "summary_large_image",
+      title: article.title,
+      description: article.excerpt,
       title: `${article.title} | Barvill Entertainment`,
       description: seoDescription,
       images: [article.cover],
@@ -69,7 +75,7 @@ export async function generateMetadata(
 export default async function JournalArticlePage({ params }: PageProps) {
   const resolvedParams = await params;
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://barvillentertainment.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const res = await fetch(`${baseUrl}/api/journal`, {
     cache: "no-store",
   });

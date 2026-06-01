@@ -94,45 +94,8 @@ export default async function JournalArticlePage({ params }: PageProps) {
     notFound();
   }
 
-  const currentArticleUrl = `${baseUrl}/journal/${encodeURIComponent(article.slug)}`;
-
-  const seoDescription =
-    article.excerpt.length > 160
-      ? article.excerpt.slice(0, 157) + "..."
-      : article.excerpt;
-
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": article.title,
-    "description": seoDescription,
-    "image": article.cover,
-    "datePublished": article.date,
-    "dateModified": article.date,
-    "author": {
-      "@type": "Organization",
-      "name": "Barvill Entertainment"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Barvill Entertainment",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://barvillentertainment.com/logo-barvill.jpg"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": currentArticleUrl
-    }
-  };
-
   return (
     <main className="min-h-screen pt-32 pb-24 px-6 md:px-12 lg:px-24 max-w-[1800px] mx-auto">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
       {/* --- CINEMATIC HEADER SECTION --- */}
       <header className="relative w-full h-[60vh] md:h-[75vh] rounded-2xl overflow-hidden mb-16">
         <img

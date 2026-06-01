@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
@@ -6,50 +5,6 @@ interface PageProps {
   params: Promise<{
     slug: string;
   }>;
-}
-
-export async function generateMetadata(
-  { params }: PageProps
-): Promise<Metadata> {
-  const resolvedParams = await params;
-
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://barvillentertainment.com";
-
-  const res = await fetch(`${baseUrl}/api/journal`, {
-    cache: "no-store",
-  });
-
-  const journalArticles = await res.json();
-
-  const article = journalArticles.find(
-    (a: any) =>
-      a.slug === decodeURIComponent(resolvedParams.slug)
-  );
-
-  if (!article) {
-    return {
-      title: "Journal | Barvill Entertainment",
-    };
-  }
-
-  return {
-    title: `${article.title} | Barvill Entertainment`,
-    description: article.excerpt,
-    openGraph: {
-      title: article.title,
-      description: article.excerpt,
-      images: [article.cover],
-      type: "article",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: article.title,
-      description: article.excerpt,
-      images: [article.cover],
-    },
-  };
 }
 
 export default async function JournalArticlePage({ params }: PageProps) {

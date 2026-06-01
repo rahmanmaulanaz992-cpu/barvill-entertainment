@@ -103,22 +103,22 @@ export default async function JournalArticlePage({ params }: PageProps) {
           alt={article.title}
           className="absolute inset-0 w-full h-full object-cover"
         />
-      </header>
-
-      {/* --- ARTICLE CONTENT --- */}
-      <article className="max-w-4xl mx-auto px-4 md:px-0 flex flex-col gap-12">
-        <div className="flex flex-col gap-4 md:gap-6">
-          <span className="text-xs md:text-sm font-semibold tracking-widest uppercase text-neutral-300">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+        <div className="absolute inset-0 p-8 md:p-16 flex flex-col justify-end max-w-5xl mx-auto w-full">
+          <span className="text-xs md:text-sm font-semibold tracking-widest uppercase text-neutral-300 mb-4">
             {article.category}
           </span>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white max-w-4xl leading-tight mb-6">
             {article.title}
           </h1>
           <div className="flex items-center text-xs md:text-sm text-neutral-500 uppercase tracking-widest">
             <span>{article.date}</span>
           </div>
         </div>
+      </header>
 
+      {/* --- ARTICLE CONTENT --- */}
+      <article className="max-w-4xl mx-auto px-4 md:px-0 flex flex-col gap-12">
         <p className="text-xl md:text-2xl leading-relaxed text-neutral-300 font-medium">
           {article.excerpt}
         </p>

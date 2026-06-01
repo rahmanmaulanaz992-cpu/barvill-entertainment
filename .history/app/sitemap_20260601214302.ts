@@ -18,6 +18,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === '' ? 1.0 : 0.8,
   }));
 
+  // Contoh kalau kamu mau tambahkan halaman artikel jurnal secara dinamis nanti:
+  // (Untuk sekarang, masukkan manual dulu atau biarkan rute statis di atas berjalan)
+  const journalPosts = [
+    '/journal/a-beautiful-boy', // Sesuaikan dengan path artikel game kamu
+  ].map((post) => ({
+    url: `${baseUrl}${post}`,
   const res = await fetch(`${baseUrl}/api/journal`, {
     cache: "no-store",
   });
@@ -27,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const journalPosts = articles.map((article: any) => ({
     url: `${baseUrl}/journal/${encodeURIComponent(article.slug)}`,
     lastModified: new Date().toISOString(),
+    changeFrequency: 'weekly' as const,
     changeFrequency: "weekly" as const,
     priority: 0.6,
   }));

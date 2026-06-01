@@ -118,7 +118,7 @@ export default async function JournalArticlePage({ params }: PageProps) {
       "name": "Barvill Entertainment",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://barvillentertainment.com/data/logo-barvill.jpg"
+        "url": "https://barvillentertainment.com/logo-barvill.jpg"
       }
     },
     "mainEntityOfPage": {

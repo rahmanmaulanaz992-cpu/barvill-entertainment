@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { motion, Variants } from "framer-motion"; // UPDATE: Import Variants resmi
+import { motion } from "framer-motion";
 import MagneticWrapper from "@/components/ui/MagneticWrapper";
 import { useRouter } from "next/navigation";
 import type { Release } from "@/lib/types";
 
-const containerVariants: Variants = {
+const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -14,8 +14,7 @@ const containerVariants: Variants = {
   },
 };
 
-// FIX: Menggunakan tipe data Variants resmi agar parameter 'ease' lolos sensor TypeScript
-const itemFadeUp: Variants = {
+const itemFadeUp: any = {
   hidden: {
     opacity: 0,
     y: 40,
@@ -100,6 +99,7 @@ export default function ReleasesClient({ releases }: ReleasesClientProps) {
                   <div className="absolute inset-0 bg-linear-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-1000 ease-out" />
                 </div>
                 <div className="flex flex-col gap-2 mb-8 grow">
+                  {/* UPDATE: Ukuran font judul disesuaikan jadi text-lg md:text-xl agar muat satu baris */}
                   <h2 className="text-lg md:text-xl font-light tracking-[0.1em] uppercase text-white leading-tight mb-2 truncate" title={release.title}>{release.title}</h2>
                   <div className="flex flex-col gap-1">
                     <h3 className="text-sm tracking-[0.2em] uppercase text-white/60 font-medium truncate" title={release.artist}>{release.artist}</h3>

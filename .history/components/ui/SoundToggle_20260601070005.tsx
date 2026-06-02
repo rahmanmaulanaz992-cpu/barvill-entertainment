@@ -8,33 +8,27 @@ export default function SoundToggle() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    const syncAudio = () => {
-      const audioEl = document.querySelector("audio");
+    // Mencari elemen audio global yang dirender oleh AmbientAudioWrapper di layout.tsx
+    const audioEl = document.querySelector("audio");
+    
+    if (audioEl) {
+      audioRef.current = audioEl;
       
-      if (audioEl) {
-        audioRef.current = audioEl;
-        setIsSoundOn(!audioEl.paused);
+      // Sinkronisasi state React awal dengan state aktual audio
+      setIsSoundOn(!audioEl.paused);
 
-        const handlePlay = () => setIsSoundOn(true);
-        const handlePause = () => setIsSoundOn(false);
+      // Listener agar state selalu sinkron walau audio dipause/play oleh faktor eksternal (misal policy browser)
+      const handlePlay = () => setIsSoundOn(true);
+      const handlePause = () => setIsSoundOn(false);
 
-        audioEl.addEventListener("play", handlePlay);
-        audioEl.addEventListener("pause", handlePause);
+      audioEl.addEventListener("play", handlePlay);
+      audioEl.addEventListener("pause", handlePause);
 
-        return () => {
-          audioEl.removeEventListener("play", handlePlay);
-          audioEl.removeEventListener("pause", handlePause);
-        };
-      }
-    };
-
-    const cleanup = syncAudio();
-    const timeoutId = setTimeout(syncAudio, 500);
-
-    return () => {
-      clearTimeout(timeoutId);
-      if (cleanup) cleanup();
-    };
+      return () => {
+        audioEl.removeEventListener("play", handlePlay);
+        audioEl.removeEventListener("pause", handlePause);
+      };
+    }
   }, []);
 
   const toggleSound = () => {
@@ -45,7 +39,8 @@ export default function SoundToggle() {
         audioRef.current.pause();
       }
     } else {
-      setIsSoundOn((prev) => !prev);
+      // Fallback state jika audio tidak ditemukan
+      setIsSoundOn(!isSoundOn);
     }
   };
 

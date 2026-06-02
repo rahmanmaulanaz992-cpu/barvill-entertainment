@@ -8,21 +8,35 @@ export default function AmbientAudio() {
   const hasInteracted = useRef(false);
 
   useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
+    // Initialize HTMLAudioElement safely
+    const audio = new Audio("/audio/ambient.mp3");
+    audio.loop = true;
 
-    audio.volume = 0; // Mulai dari sunyi untuk fade-in cinematic
+    audio.addEventListener("play", () => {
+      console.log("AUDIO PLAYING");
+    });
+
+    audio.addEventListener("error", (e) => {
+      console.log("AUDIO ERROR", e);
+    });
+
+    audio.volume = 0; // Start completely silent for smooth atmospheric fade-in
+    audioRef.current = audio;
+
     const targetVolume = 0.5;
     const volumeStep = 0.002;
 
     const startAudio = () => {
+      console.log("AUDIO DIMULAI");
       if (hasInteracted.current) return;
       hasInteracted.current = true;
 
+      // Attempt to play audio
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
+            // Soft atmospheric fade-in
             fadeIntervalRef.current = setInterval(() => {
               if (audio.volume < targetVolume) {
                 audio.volume = Math.min(audio.volume + volumeStep, targetVolume);
@@ -34,7 +48,9 @@ export default function AmbientAudio() {
               }
             }, 100);
           })
-          .catch(() => {});
+          .catch(() => {
+            // Graceful silent fallback if blocked by browser or file is missing
+          });
       }
 
       removeListeners();
@@ -54,21 +70,20 @@ export default function AmbientAudio() {
 
     addListeners();
 
+    // Cleanup on unmount (Production Safe)
     return () => {
       removeListeners();
       if (fadeIntervalRef.current) {
         clearInterval(fadeIntervalRef.current);
       }
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = "";
+        audioRef.current = null;
+      }
     };
   }, []);
 
-  return (
-    <audio
-      ref={audioRef}
-      src="/audio/ambient.mp3"
-      loop
-      className="hidden"
-      preload="auto"
-    />
-  );
+  // Purely functional logic layer, renders absolutely nothing
+  return null;
 }

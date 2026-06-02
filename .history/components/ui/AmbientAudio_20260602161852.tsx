@@ -59,9 +59,13 @@ export default function AmbientAudio() {
       if (fadeIntervalRef.current) {
         clearInterval(fadeIntervalRef.current);
       }
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
     };
   }, []);
 
+  // Merender tag audio fisik ke dalam HTML agar bisa dibaca oleh SoundToggle
   return (
     <audio
       ref={audioRef}

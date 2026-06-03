@@ -99,8 +99,10 @@ export default function ReleasesClient({ releases }: { releases: Release[] }) {
     );
   };
 
+  // Algoritma Google-Style sliding window pagination untuk total halaman yang sangat besar
   const getPageNumbers = () => {
     const pages: (number | string)[] = [];
+    const maxVisiblePages = 5; 
 
     if (totalPages <= 7) {
       for (let i = 1; i <= totalPages; i++) {
@@ -300,27 +302,19 @@ export default function ReleasesClient({ releases }: { releases: Release[] }) {
         {totalPages > 1 && (
           <motion.div 
             variants={itemFadeUp}
-            className="flex flex-col items-center gap-6 mt-8 pt-8 border-t border-white/5 w-full select-none"
+            className="flex flex-col items-center gap-4 mt-8 pt-8 border-t border-white/5 w-full select-none"
           >
-            {/* Animated Brand Text: BARBARIAN VILLAGE */}
+            {/* Google-Style Brand Text: BARBARIAN VILLAGE */}
             <div className="flex flex-col items-center mb-2">
-              <motion.span 
-                animate={{ 
-                  opacity: [0.4, 0.75, 0.4],
-                  textShadow: [
-                    "0 0 10px rgba(255,255,255,0)", 
-                    "0 0 15px rgba(255,255,255,0.2)", 
-                    "0 0 10px rgba(255,255,255,0)"
-                  ]
-                }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="text-[12px] md:text-sm tracking-[0.6em] text-white/60 uppercase font-light font-mono block text-center translate-x-[0.3em] cursor-default"
-              >
+              <span className="text-[12px] md:text-sm tracking-[0.6em] text-white/60 uppercase font-light font-mono block text-center translate-x-[0.3em]">
                 Barbarian Village
-              </motion.span>
+              </span>
+              <span className="text-[9px] tracking-[0.3em] text-white/35 uppercase font-mono mt-1">
+                Halaman {currentPage} dari {totalPages}
+              </span>
             </div>
 
-            <div className="flex items-center gap-2 md:gap-3 mt-1 font-mono">
+            <div className="flex items-center gap-2 md:gap-3 mt-2 font-mono">
               {/* Button Previous */}
               <button
                 disabled={currentPage === 1}

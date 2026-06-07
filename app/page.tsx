@@ -25,7 +25,7 @@ const heroStaggerContainer = {
 };
 
 const CinematicDivider = ({ narrativeText }: { narrativeText?: string }) => (
-  <div className="relative w-full py-40 md:py-64 flex flex-col items-center justify-center pointer-events-none select-none z-10 overflow-hidden">
+  <div className="relative w-full py-24 md:py-64 flex flex-col items-center justify-center pointer-events-none select-none z-10 overflow-hidden">
     <div className="absolute inset-0 bg-linear-to-b from-black via-transparent to-black z-0 opacity-80" />
     
     {narrativeText && (
@@ -37,9 +37,9 @@ const CinematicDivider = ({ narrativeText }: { narrativeText?: string }) => (
         className="absolute z-20 text-center px-4"
       >
         <motion.div 
-          animate={{ opacity: [0.15, 0.4, 0.15], filter: ["blur(1px)", "blur(3px)", "blur(1px)"] }}
+          animate={{ opacity: [0.15, 0.4, 0.15] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="text-white/60 text-[10px] md:text-xs font-mono tracking-[0.5em] uppercase text-center"
+          className="text-white/60 text-[10px] md:text-xs font-mono tracking-[0.5em] uppercase text-center blur-[1px] md:blur-none"
         >
           {narrativeText}
         </motion.div>
@@ -286,7 +286,7 @@ export default function HomePage() {
       <motion.div 
         animate={{ opacity: [0.03, 0.06, 0.03] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="fixed inset-0 z-50 pointer-events-none mix-blend-screen"
+        className="fixed inset-0 z-50 pointer-events-none mix-blend-screen hidden md:block"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         }}
@@ -296,12 +296,12 @@ export default function HomePage() {
       <motion.div
         animate={{ scale: [0.95, 1.05, 0.95], opacity: [0.02, 0.06, 0.02] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] aspect-square rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_60%)] mix-blend-screen pointer-events-none z-0 transform-gpu"
+        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] aspect-square rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_60%)] mix-blend-screen pointer-events-none z-0 transform-gpu hidden md:block"
         aria-hidden="true"
       />
 
       {/* Environmental Fog Layers */}
-      <motion.div style={{ x: envX, y: envY }} className="fixed inset-0 z-0 pointer-events-none mix-blend-screen opacity-15">
+      <motion.div style={{ x: envX, y: envY }} className="fixed inset-0 z-0 pointer-events-none mix-blend-screen opacity-15 hidden md:block">
         <motion.div 
           animate={{ 
             x: ["-5%", "5%", "-5%"], 
@@ -362,7 +362,7 @@ export default function HomePage() {
         </motion.div>
 
         {/* Layer 2: Atmosphere & Light Leaks */}
-        <div className="absolute inset-0 z-10 pointer-events-none">
+        <div className="absolute inset-0 z-10 pointer-events-none hidden md:block">
           <motion.div 
             animate={{ opacity: [0.02, 0.06, 0.02], scale: [1, 1.1, 1] }}
             transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
@@ -384,7 +384,7 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 6, delay: 0.2, ease: cinematicEase }}
-              className="absolute top-[5%] -left-[10%] whitespace-nowrap will-change-transform mix-blend-screen flex flex-col items-start"
+              className="absolute top-[5%] -left-[10%] whitespace-nowrap will-change-transform mix-blend-screen hidden md:flex flex-col items-start"
             >
               <span className="text-[8px] md:text-[10px] tracking-[0.5em] text-white/20 font-mono uppercase mb-4 ml-12 md:ml-24">Echo_01: Absence</span>
               <motion.h2 
@@ -402,7 +402,7 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 5, delay: 0.8, ease: cinematicEase }}
-              className="absolute top-[25%] -right-[15%] whitespace-nowrap will-change-transform mix-blend-screen flex flex-col items-end"
+              className="absolute top-[25%] -right-[15%] whitespace-nowrap will-change-transform mix-blend-screen hidden md:flex flex-col items-end"
             >
               <span className="text-[8px] md:text-[10px] tracking-[0.5em] text-white/20 font-mono uppercase mb-4 mr-12 md:mr-24">Echo_02: Frequency</span>
               <motion.h2 
@@ -420,7 +420,7 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 1.05 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 4, delay: 1.4, ease: cinematicEase }}
-              className="absolute bottom-[5%] -left-[5%] whitespace-nowrap will-change-transform mix-blend-screen flex flex-col items-start"
+              className="absolute bottom-[5%] -left-[5%] whitespace-nowrap will-change-transform mix-blend-screen hidden md:flex flex-col items-start"
             >
               <span className="text-[8px] md:text-[10px] tracking-[0.5em] text-white/20 font-mono uppercase mb-4 ml-8 md:ml-16">Echo_03: Residual</span>
               <motion.h2 
@@ -452,7 +452,7 @@ export default function HomePage() {
 
             <motion.h1
             variants={fadeUp}
-            className="flex flex-col items-center text-6xl md:text-8xl lg:text-[10rem] font-light tracking-tight leading-[0.85] text-white uppercase mb-12 relative z-20"
+            className="flex flex-col items-center text-5xl md:text-8xl lg:text-[10rem] font-light tracking-tight leading-[0.85] text-white uppercase mb-12 relative z-20"
           >
             <motion.span 
               animate={{ textShadow: ["0px 0px 10px rgba(255,255,255,0.1)", "0px 0px 40px rgba(255,255,255,0.3)", "0px 0px 10px rgba(255,255,255,0.1)"] }}
@@ -461,7 +461,7 @@ export default function HomePage() {
             >
               BARVILL
             </motion.span>
-            <span className="block text-3xl md:text-5xl lg:text-[4rem] text-white/20 font-extralight tracking-[0.3em] mt-4 italic drop-shadow-none">ENTERTAINMENT</span>
+            <span className="block text-2xl md:text-5xl lg:text-[4rem] text-white/20 font-extralight tracking-[0.3em] mt-4 italic drop-shadow-none">ENTERTAINMENT</span>
             </motion.h1>
 
             <motion.p
@@ -497,7 +497,7 @@ export default function HomePage() {
         <div className="relative bg-black flex flex-col w-full">
 
         {/* Global Continuous Atmospheric Gradient */}
-        <motion.div style={{ y: globalAtmosY }} className="absolute inset-0 z-0 pointer-events-none h-[200vh]">
+        <motion.div style={{ y: globalAtmosY }} className="absolute inset-0 z-0 pointer-events-none h-[200vh] hidden md:block">
           {/* Subtle slow drifting light */}
           <motion.div 
             animate={{ 
@@ -517,10 +517,10 @@ export default function HomePage() {
         </motion.div>
 
       {/* 2. CINEMATIC FEATURED MUSIC VIDEO SECTION */}
-      <section ref={releaseRef} className="relative w-full min-h-[140vh] flex items-center justify-center py-40 md:py-72 px-4 md:px-8 overflow-hidden">
+      <section ref={releaseRef} className="relative w-full min-h-[100vh] md:min-h-[140vh] flex items-center justify-center py-24 md:py-72 px-4 md:px-8 overflow-hidden">
         
         {/* Layer 1: Massive Atmospheric Typography */}
-        <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen overflow-hidden">
+        <div className="absolute inset-0 z-0 hidden md:flex items-center justify-center pointer-events-none mix-blend-screen overflow-hidden">
           <motion.div 
             style={{ y: releaseTitleY }} 
             initial={{ opacity: 0, scale: 0.95 }}
@@ -558,9 +558,13 @@ export default function HomePage() {
               className="absolute inset-0 group-hover:scale-[1.05] transition-all duration-[1.5s] ease-[0.16,1,0.3,1] pointer-events-none"
               style={{ filter: "none", mixBlendMode: "normal" }}
             >
+              <div 
+                className="absolute inset-0 bg-cover bg-center md:hidden"
+                style={{ backgroundImage: `url('${displayVideo.thumbnail}')` }}
+              />
               <iframe
                 src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&playsinline=1&rel=0`}
-                className="absolute inset-0 w-full h-full scale-[1.15]"
+                className="hidden md:block absolute inset-0 w-full h-full scale-[1.15]"
                 allow="autoplay; encrypted-media"
                 frameBorder="0"
                 style={{ filter: "none", mixBlendMode: "normal" }}
@@ -576,10 +580,10 @@ export default function HomePage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-20%" }}
-            className="w-full md:w-[45vw] md:-ml-[10vw] relative z-20 mt-12 md:mt-24 lg:mt-32 flex flex-col items-start text-left bg-black/40 backdrop-blur-xl border border-white/5 hover:border-white/15 transition-colors duration-1000 ease-[0.16,1,0.3,1] p-8 md:p-14 shadow-[0_30px_60px_rgba(0,0,0,0.9)]"
+            className="w-full md:w-[45vw] md:-ml-[10vw] relative z-20 -mt-6 md:mt-24 lg:mt-32 flex flex-col items-start text-left bg-black/40 backdrop-blur-xl border border-white/5 hover:border-white/15 transition-colors duration-1000 ease-[0.16,1,0.3,1] p-6 md:p-14 shadow-[0_30px_60px_rgba(0,0,0,0.9)]"
           >
             
-            <motion.h2 variants={fadeUp} className="text-5xl md:text-7xl lg:text-[6.5rem] font-light tracking-tighter uppercase text-white leading-[0.85] mb-6">
+            <motion.h2 variants={fadeUp} className="text-4xl md:text-7xl lg:text-[6.5rem] font-light tracking-tighter uppercase text-white leading-[0.85] mb-4 md:mb-6">
             {(displayVideo as any).title}
             </motion.h2>
             
@@ -617,10 +621,10 @@ export default function HomePage() {
       <CinematicDivider narrativeText="Sector 01: Descent Into Anomaly" />
 
       {/* 3. CINEMATIC ARTIST PRESENCE SECTION */}
-      <section ref={artistRef} className="relative w-full min-h-[140vh] flex items-center justify-center py-40 md:py-72 px-4 md:px-8 overflow-hidden">
+      <section ref={artistRef} className="relative w-full min-h-[100vh] md:min-h-[140vh] flex items-center justify-center py-24 md:py-72 px-4 md:px-8 overflow-hidden">
         
         {/* Layer 1: Massive Atmospheric Typo Background */}
-        <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen overflow-hidden">
+        <div className="absolute inset-0 z-0 hidden md:flex items-center justify-center pointer-events-none mix-blend-screen overflow-hidden">
           <motion.div 
             style={{ y: giantTypo2Y }} 
             initial={{ opacity: 0, scale: 0.95 }}
@@ -641,7 +645,7 @@ export default function HomePage() {
         </div>
 
         {/* Layer 2: Fragmented Oversized Artist Identity */}
-        <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen overflow-hidden">
+        <div className="absolute inset-0 z-0 hidden md:flex items-center justify-center pointer-events-none mix-blend-screen overflow-hidden">
           <motion.div 
             style={{ y: artistTitleY }} 
             initial={{ opacity: 0, scale: 0.95 }}
@@ -671,14 +675,14 @@ export default function HomePage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-20%" }}
-              className="w-full md:w-[40vw] relative z-20 md:mr-[5vw] mb-12 md:mb-0 md:-mt-[20vh] flex flex-col items-start text-left bg-black/40 backdrop-blur-xl border border-white/5 hover:border-white/15 transition-colors duration-1000 ease-[0.16,1,0.3,1] p-8 md:p-14 shadow-[0_30px_60px_rgba(0,0,0,0.9)] order-2 md:order-1"
+              className="w-full md:w-[40vw] relative z-20 md:mr-[5vw] -mt-6 md:mt-0 mb-12 md:mb-0 md:-mt-[20vh] flex flex-col items-start text-left bg-black/40 backdrop-blur-xl border border-white/5 hover:border-white/15 transition-colors duration-1000 ease-[0.16,1,0.3,1] p-6 md:p-14 shadow-[0_30px_60px_rgba(0,0,0,0.9)] order-2 md:order-1"
             >
               <motion.div variants={fadeUp} className="flex items-center gap-4 mb-8">
                 <div className="w-8 h-px bg-white/30" />
               <span className="text-[9px] tracking-[0.4em] text-white/40 uppercase font-mono">BARVILL ENTERTAINMENT</span>
               </motion.div>
               
-              <motion.h3 variants={fadeUp} className="text-5xl md:text-7xl font-light tracking-widest uppercase text-white leading-[0.9] mb-6">
+              <motion.h3 variants={fadeUp} className="text-4xl md:text-7xl font-light tracking-widest uppercase text-white leading-[0.9] mb-4 md:mb-6">
                 {(displayVideo as any).title}
               </motion.h3>
               
@@ -704,16 +708,20 @@ export default function HomePage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-20%" }}
-              className="w-full md:w-[45vw] aspect-[3/4] relative z-10 bg-white/5 border border-white/5 group cursor-pointer shadow-[0_40px_80px_rgba(0,0,0,0.9)] overflow-hidden order-1 md:order-2"
+              className="w-full max-w-sm md:max-w-none md:w-[45vw] aspect-[3/4] relative z-10 bg-white/5 border border-white/5 group cursor-pointer shadow-[0_40px_80px_rgba(0,0,0,0.9)] overflow-hidden order-1 md:order-2 mx-auto md:mx-0"
             >
               <motion.div 
                 animate={{ scale: [1, 1.02, 1] }}
                 transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute inset-0 grayscale opacity-50 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-[1.5s] ease-[0.16,1,0.3,1] pointer-events-none"
               >
+                <div 
+                  className="absolute inset-0 bg-cover bg-center md:hidden"
+                  style={{ backgroundImage: `url('https://img.youtube.com/vi/_x0tBifMst0/maxresdefault.jpg')` }}
+                />
                 <iframe
                   src={`https://www.youtube.com/embed/_x0tBifMst0?autoplay=1&mute=1&loop=1&playlist=_x0tBifMst0&controls=0&modestbranding=1&playsinline=1&rel=0`}
-                  className="absolute inset-0 w-full h-full scale-[1.15]"
+                  className="hidden md:block absolute inset-0 w-full h-full scale-[1.15]"
                   allow="autoplay; encrypted-media"
                   frameBorder="0"
                 />
@@ -736,10 +744,10 @@ export default function HomePage() {
       <CinematicDivider narrativeText="Sector 02: Structural Resonance" />
 
       {/* 4. CINEMATIC EDITORIAL JOURNAL SECTION */}
-      <section ref={journalRef} className="relative w-full min-h-[140vh] flex items-center justify-center py-40 md:py-72 px-4 md:px-8 overflow-hidden">
+      <section ref={journalRef} className="relative w-full min-h-[100vh] md:min-h-[140vh] flex items-center justify-center py-24 md:py-72 px-4 md:px-8 overflow-hidden">
         
         {/* Layer 1: Massive Atmospheric Typo Background */}
-        <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen overflow-hidden">
+        <div className="absolute inset-0 z-0 hidden md:flex items-center justify-center pointer-events-none mix-blend-screen overflow-hidden">
           <motion.div 
             style={{ y: giantTypo3Y }} 
             initial={{ opacity: 0, scale: 0.95 }}
@@ -810,10 +818,10 @@ export default function HomePage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-20%" }}
-              className="w-full relative z-20 flex flex-col items-center text-center -mt-[15vh] md:-mt-[25vh] pointer-events-none"
+              className="w-full relative z-20 flex flex-col items-center text-center -mt-12 md:-mt-[25vh] pointer-events-none"
             >
-              <motion.h3 variants={fadeUp} className="text-5xl md:text-8xl lg:text-[9rem] font-light tracking-tighter uppercase text-white leading-[0.85] mix-blend-screen drop-shadow-2xl">
-                <span className="block italic font-extralight text-white/70 tracking-[0.1em] text-3xl md:text-6xl lg:text-[5rem] mb-2 md:mb-6">{titleFirst}</span>
+              <motion.h3 variants={fadeUp} className="text-4xl md:text-8xl lg:text-[9rem] font-light tracking-tighter uppercase text-white leading-[0.85] mix-blend-screen drop-shadow-2xl">
+                <span className="block italic font-extralight text-white/70 tracking-[0.1em] text-2xl md:text-6xl lg:text-[5rem] mb-2 md:mb-6">{titleFirst}</span>
                 {titleSecond}
               </motion.h3>
             </motion.div>
@@ -825,7 +833,7 @@ export default function HomePage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-20%" }}
-              className="w-full md:w-[35vw] relative z-30 mt-12 md:mt-24 flex flex-col items-center md:items-start text-center md:text-left bg-black/40 backdrop-blur-xl border border-white/5 hover:border-white/15 transition-colors duration-1000 ease-[0.16,1,0.3,1] p-8 md:p-14 shadow-[0_30px_60px_rgba(0,0,0,0.9)]"
+              className="w-full md:w-[35vw] relative z-30 mt-8 md:mt-24 flex flex-col items-center md:items-start text-center md:text-left bg-black/40 backdrop-blur-xl border border-white/5 hover:border-white/15 transition-colors duration-1000 ease-[0.16,1,0.3,1] p-6 md:p-14 shadow-[0_30px_60px_rgba(0,0,0,0.9)]"
             >
               <motion.div variants={fadeUp} className="flex items-center gap-4 mb-8">
                 <span className="text-[9px] tracking-[0.4em] text-white/40 uppercase font-mono">{latestArticle.category}</span>

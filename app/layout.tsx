@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false, // Clean up unwanted auto-links on iOS
   },
-  description: "Barvill Entertainment adalah entertainment hub independent yang berfokus pada pengembangan talenta, karya kreatif, artist development, dan ekosystem hiburan digital",
+  description: "Barvill Entertainment is an independent entertainment hub focused on talent development, creative works, artist development, and the digital entertainment ecosystem",
   keywords: [
     "Barvill Entertainment",
     "Entertainment Ecosystem",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     locale: "id_ID",
     url: "/",
     title: "Barvill Entertainment — Entertainment Hub",
-    description: "Barvill Entertainment adalah entertainment hub independent yang berfokus pada pengembangan talenta, karya kreatif, artist development, dan ekosistem hiburan digital",
+    description: "Barvill Entertainment is an independent entertainment hub focused on talent development, creative works, artist development, and the digital entertainment ecosystem",
     siteName: "Barvill Entertainment",
     images: [
       {
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Barvill Entertainment — Entertainment Hub",
-    description: "Barvill Entertainment adalah entertainment hub independent yang berfokus pada pengembangan talenta, karya kreatif, artist development, dan ekosistem hiburan digital",
+    description: "Barvill Entertainment is an independent entertainment hub focused on talent development, creative works, artist development, and the digital entertainment ecosystem",
     creator: "@barvill", // Placeholder Twitter Handle
     images: ["/twitter-image.jpg"], // Placeholder for Twitter Image
   },
@@ -100,7 +100,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="id" // Semantic update to match primary content language
+      lang="en" // Semantic update to match primary content language
       className={`${inter.className} h-full antialiased bg-black`}
       suppressHydrationWarning // Production safe handling for Next.js app router & extension injections
     >

@@ -39,8 +39,8 @@ export const artistsData: ArtistDetail[] = [
     category: "CINEMATIC HIP-HOP",
     status: "EXCLUSIVE",
     bio: [
-      "BOYZAI adalah anomali di tengah industri yang seragam. Berangkat dari sirkuit bawah tanah distopia, penceritaan audio-visualnya menjembatani tekstur industrial brutal dengan kerentanan lirik introspektif.",
-      "Karyanya bukan sekadar musik, melainkan arsitektur sinematik murni yang meredefinisi batasan hip-hop alternatif. Di bawah Barvill Entertainment, visi ini dibebaskan tanpa kompromi."
+      "BOYZAI is an anomaly amidst a uniform industry. Emerging from the dystopian underground circuit, his audio-visual storytelling bridges brutal industrial textures with introspective lyrical vulnerability.",
+      "His work is not just music, but pure cinematic architecture that redefines the boundaries of alternative hip-hop. Under Barvill Entertainment, this vision is unleashed without compromise."
     ],
     image: "https://images.unsplash.com/photo-1493225457289-7170889f0747?auto=format&fit=crop&q=80",
     releases: [{ slug: "echoes", title: "ECHOES", year: "2026", type: "Album" }],
@@ -52,8 +52,8 @@ export const artistsData: ArtistDetail[] = [
     category: "INDUSTRIAL EXPERIMENTAL",
     status: "EXCLUSIVE",
     bio: [
-      "G-MARTYR beroperasi di frekuensi yang tidak terlihat. Seorang visioner yang menghancurkan instrumen organik secara analog untuk menciptakan lanskap suara mekanis yang absolut.",
-      "Pendekatannya terhadap desain suara mengubah noise menjadi bahasa utama, mengundang pendengar masuk ke dalam dimensi distopia yang gelap namun sangat manusiawi."
+      "G-MARTYR operates on unseen frequencies. A visionary who analogically destroys organic instruments to create an absolute mechanical soundscape.",
+      "His approach to sound design turns noise into a primary language, inviting listeners into a dark yet deeply human dystopian dimension."
     ],
     image: "https://images.unsplash.com/photo-1533134486753-c833f0eddebd?auto=format&fit=crop&q=80",
     releases: [{ slug: "the-awakening", title: "THE AWAKENING", year: "2026", type: "Short Film" }],
@@ -69,7 +69,7 @@ export const releasesData: ReleaseDetail[] = [
     artistSlug: "boyzai",
     type: "ALBUM",
     date: "OCT 2026",
-    description: "Sebuah pengalaman audio-visual distopia. Menyatukan tekstur industrial brutal dengan kerentanan introspektif. ECHOES adalah monumen sinematik dari BOYZAI.",
+    description: "A dystopian audio-visual experience. Uniting brutal industrial textures with introspective vulnerability. ECHOES is a cinematic monument from BOYZAI.",
     image: "https://images.unsplash.com/photo-1493225457289-7170889f0747?auto=format&fit=crop&q=80",
     formats: ["Digital / Streaming", "12\" Limited Vinyl", "Spatial Audio"],
     tracklist: [
@@ -94,9 +94,9 @@ export const articlesData: ArticleDetail[] = [
     category: "Behind The Scene",
     date: "OCT 24, 2026",
     content: [
-      "Dalam era di mana algoritma mendikte struktur lagu, G-Martyr memilih untuk mundur ke ruang bawah tanah. 'THE AWAKENING' bukanlah album yang ditulis, melainkan dirakit layaknya mesin perang.",
-      "Proses kreatifnya melibatkan instrumen yang sengaja dirusak: amplifier analog yang didorong melampaui batas panasnya, plat besi yang dipukul untuk menciptakan reverb alami, dan rekaman field-audio dari pabrik yang ditinggalkan.",
-      "Keindahan dari karya G-Martyr terletak pada kemampuannya menemukan harmoni di tengah kekacauan mekanis. Ini adalah transmisi murni dari visi artistik yang menolak berkompromi."
+      "In an era where algorithms dictate song structures, G-Martyr chose to retreat to the underground. 'THE AWAKENING' is not an album written, but assembled like a war machine.",
+      "His creative process involves deliberately damaged instruments: analog amplifiers pushed beyond their thermal limits, iron plates struck to create natural reverb, and field-audio recordings from abandoned factories.",
+      "The beauty of G-Martyr's work lies in his ability to find harmony amidst mechanical chaos. It is a pure transmission of an artistic vision that refuses to compromise."
     ],
     image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80"
   },
@@ -106,7 +106,7 @@ export const articlesData: ArticleDetail[] = [
     category: "Artist Spotlight",
     date: "OCT 12, 2026",
     content: [
-      "Suara Novielle adalah entitas yang hidup. Di satu sisi, ia membawa kehangatan soul tradisional; di sisi lain, ia terbungkus dalam distorsi elektronik mutakhir."
+      "Novielle's voice is a living entity. On one hand, it carries the warmth of traditional soul; on the other, it is enveloped in cutting-edge electronic distortion."
     ],
     image: "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80"
   }

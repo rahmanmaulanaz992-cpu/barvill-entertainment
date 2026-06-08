@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Strictly Dark Cinematic Theme (Mencegah flash of white di Light-Mode OS) */
+  /* Strictly Dark Cinematic Theme (Prevents flash of white in Light-Mode OS) */
   --background: #000000;
   --foreground: #ffffff;
   --font-sans: var(--font-geist-sans);
@@ -16,7 +16,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  /* Mencegah iOS Safari mengubah skala teks saat HP diputar (landscape) */
+  /* Prevents iOS Safari from scaling text when phone is rotated (landscape) */
   -webkit-text-size-adjust: 100%;
 }
 
@@ -58,7 +58,7 @@ a, button, [role="button"], input {
   outline: none;
 }
 
-/* Premium Accessibility Focus (Untuk navigasi dengan Keyboard "Tab") */
+/* Premium Accessibility Focus (For Keyboard "Tab" navigation) */
 :focus-visible {
   outline: 1px solid rgba(255, 255, 255, 0.3);
   outline-offset: 6px;

@@ -214,7 +214,7 @@ export default function HomePage() {
     title: "The Anatomy of Sound",
     category: "Behind The Scene",
     date: "OCT 24, 2026",
-    content: ["Menggali lebih dalam proses kreatif di balik era 'THE AWAKENING'. Bagaimana lanskap suara mekanis diciptakan dari instrumen organik yang dihancurkan secara analog."],
+    content: ["Delving deeper into the creative process behind 'THE AWAKENING' era. How a mechanical soundscape was created from organically destroyed analog instruments."],
     image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80"
   });
 
@@ -247,7 +247,7 @@ export default function HomePage() {
   const titleFirst = titleParts[0];
   const titleSecond = titleParts.length > 1 ? titleParts.slice(1).join(":").trim() : "";
 
-  // --- EXTRACT VIDEO ID DYNAMICALLY DARI YOUTUBE URL ---
+  // --- EXTRACT VIDEO ID DYNAMICALLY FROM YOUTUBE URL ---
   const videoId = displayVideo.url 
     ? (displayVideo.url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/)?.[1] || "qktecDUbZ00")
     : "qktecDUbZ00";
@@ -468,8 +468,8 @@ export default function HomePage() {
             variants={fadeUp}
             className="max-w-lg text-xs md:text-sm text-white/40 font-light leading-loose tracking-[0.2em] relative z-20"
           >
-            Misi Kami sederhana,<br /> Biarkan kamu fokus pada karya mu,<br />
-            sisa nya biar kami yang urus.
+            Our mission is simple,<br /> Let you focus on your craft,<br />
+            we will take care of the rest.
             </motion.p>
           </motion.div>
         </motion.div>
@@ -488,10 +488,10 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* WRAPPER UNTUK KONTEN UTAMA: Membuatnya naik di atas hero yang ter-parallax */}
+      {/* WRAPPER FOR MAIN CONTENT: Makes it rise above the parallaxed hero */}
       <div className="relative z-30 flex flex-col w-full">
         
-        {/* Cinematic Gradient Transition dari Hero ke Content */}
+        {/* Cinematic Gradient Transition from Hero to Content */}
         <div className="w-full h-[30vh] md:h-[40vh] bg-linear-to-b from-transparent via-black/80 to-black pointer-events-none" />
 
         <div className="relative bg-black flex flex-col w-full">

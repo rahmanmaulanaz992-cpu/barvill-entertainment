@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   compiler: {
-    // Production safe: Hapus semua console.log (kecuali error) untuk hasil inspect yang profesional
+    // Production safe: Remove all console.log (except error) for professional inspect results
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
   },
   images: {
@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
-    // Mengurangi waktu load dengan mengoptimalkan tree-shaking library berat
+    // Reduce load time by optimizing tree-shaking for heavy libraries
     optimizePackageImports: ["framer-motion", "lucide-react"],
   },
 };

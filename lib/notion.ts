@@ -17,7 +17,7 @@ export interface NotionJournalArticle {
 }
 
 export async function getJournalArticles(): Promise<NotionJournalArticle[]> {
-  // Type assertion untuk menjamin strict string pada argumen query Notion
+  // Type assertion to ensure strict string on Notion query arguments
   const dataSourceId = process.env.NOTION_DATA_SOURCE_ID as string;
 
   if (!dataSourceId) {
@@ -41,14 +41,14 @@ export async function getJournalArticles(): Promise<NotionJournalArticle[]> {
     const articles: NotionJournalArticle[] = [];
 
     for (const page of response.results) {
-      // Type guard resmi Notion SDK untuk memastikan page adalah FullPageResponse
+      // Official Notion SDK Type guard to ensure page is FullPageResponse
       if (!isFullPage(page)) {
         continue;
       }
 
       let coverUrl = "";
 
-      // Cek apakah ada properti custom "cover" bertipe files (seperti di kode lama)
+      // Check if there is a custom "cover" property of type files (like in old code)
       const coverProp = page.properties.cover;
       if (coverProp?.type === "files" && coverProp.files.length > 0) {
         const file = coverProp.files[0];
@@ -58,7 +58,7 @@ export async function getJournalArticles(): Promise<NotionJournalArticle[]> {
           coverUrl = file.file.url;
         }
       } else if (page.cover) {
-        // Fallback untuk membaca gambar cover native dari Notion page
+        // Fallback to read native cover image from Notion page
         if (page.cover.type === "external") {
           coverUrl = page.cover.external.url;
         } else if (page.cover.type === "file") {
@@ -66,7 +66,7 @@ export async function getJournalArticles(): Promise<NotionJournalArticle[]> {
         }
       }
 
-      // Membaca properties menggunakan Type Narrowing untuk menghindari any
+      // Read properties using Type Narrowing to avoid any
       const namaProp = page.properties.Nama;
       const title =
         namaProp?.type === "title"
@@ -207,7 +207,7 @@ export async function getArticleBySlug(
 }
 
 export async function getArchiveArticles(): Promise<NotionJournalArticle[]> {
-  // Type assertion untuk menjamin strict string pada argumen query Notion
+  // Type assertion to ensure strict string on Notion query arguments
   const dataSourceId = process.env.NOTION_ARCHIVE_DATABASE_ID as string;
 
   if (!dataSourceId) {
@@ -231,14 +231,14 @@ export async function getArchiveArticles(): Promise<NotionJournalArticle[]> {
     const articles: NotionJournalArticle[] = [];
 
     for (const page of response.results) {
-      // Type guard resmi Notion SDK untuk memastikan page adalah FullPageResponse
+      // Official Notion SDK Type guard to ensure page is FullPageResponse
       if (!isFullPage(page)) {
         continue;
       }
 
       let coverUrl = "";
 
-      // Cek apakah ada properti custom "cover" bertipe files (seperti di kode lama)
+      // Check if there is a custom "cover" property of type files (like in old code)
       const coverProp = page.properties.cover;
       if (coverProp?.type === "files" && coverProp.files.length > 0) {
         const file = coverProp.files[0];
@@ -248,7 +248,7 @@ export async function getArchiveArticles(): Promise<NotionJournalArticle[]> {
           coverUrl = file.file.url;
         }
       } else if (page.cover) {
-        // Fallback untuk membaca gambar cover native dari Notion page
+        // Fallback to read native cover image from Notion page
         if (page.cover.type === "external") {
           coverUrl = page.cover.external.url;
         } else if (page.cover.type === "file") {
@@ -256,7 +256,7 @@ export async function getArchiveArticles(): Promise<NotionJournalArticle[]> {
         }
       }
 
-      // Membaca properties menggunakan Type Narrowing untuk menghindari any
+      // Read properties using Type Narrowing to avoid any
       const namaProp = page.properties.Nama;
       const title =
         namaProp?.type === "title"

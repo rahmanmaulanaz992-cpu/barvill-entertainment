@@ -4,15 +4,15 @@ const CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNVjIIlV6NAtvNk75PSJCfE2WQw1aB_dN95dvt-a8BBD76eih1QvFqIGbpY926IY0hIs41yxj1IlPq/pub?output=csv";
 
 /**
- * Fungsi otomatis untuk mengubah link share Google Drive biasa
- * menjadi format Direct View (lh3.googleusercontent.com)
+ * Automated function to convert regular Google Drive share links
+ * into Direct View format (lh3.googleusercontent.com)
  */
 function formatDriveUrl(url: string): string {
   if (!url) return "";
   
-  // Deteksi apakah ini link Google Drive
+  // Detect if this is a Google Drive link
   if (url.includes("drive.google.com")) {
-    // Regex untuk mengambil ID File dari berbagai format link Drive
+    // Regex to extract File ID from various Drive link formats
     const match = url.match(/\/d\/([^/]+)/) || url.match(/id=([^&]+)/);
     if (match && match[1]) {
       const fileId = match[1];
@@ -20,12 +20,12 @@ function formatDriveUrl(url: string): string {
     }
   }
   
-  // Jika bukan link Drive (misal link hosting lain), kembalikan apa adanya
+  // If not a Drive link (e.g., other hosting links), return as is
   return url;
 }
 
 /**
- * Fungsi untuk mem-parse text CSV menjadi array 2 dimensi.
+ * Function to parse CSV text into a 2-dimensional array.
  */
 function parseCSV(text: string): string[][] {
   const result: string[][] = [];
@@ -104,14 +104,14 @@ export async function getReleases(): Promise<Release[]> {
         continue;
       }
 
-      // Di sini fungsi formatDriveUrl otomatis mengubah link sebelum dimasukkan ke objek
+      // Here the formatDriveUrl function automatically formats the link before inserting into the object
       const release = {
         slug: rowData.slug || "",
         title: rowData.title || "",
         artist: rowData.artist || "",
         artistSlug: rowData.artistSlug || "",
         album: rowData.album || "",
-        cover: formatDriveUrl(rowData.cover || ""), // <--- OTOMATIS DI FORMAT DI SINI
+        cover: formatDriveUrl(rowData.cover || ""), // <--- AUTOMATICALLY FORMATTED HERE
         lyrics: rowData.lyrics || "",
         audioUrl: rowData.audioUrl || "",
         releaseDate: rowData.releaseDate || "",

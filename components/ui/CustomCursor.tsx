@@ -22,14 +22,14 @@ export default function CustomCursor() {
   useEffect(() => {
     const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
 
-    // Callback listener untuk mendeteksi perubahan kapabilitas pointer
+    // Callback listener to detect pointer capability changes
     const handleMediaChange = (e: MediaQueryListEvent) => {
       setIsDesktop(e.matches);
     };
 
     mediaQuery.addEventListener("change", handleMediaChange);
 
-    // Menghindari sinkron setState di body useEffect, lakukan inisialisasi awal secara asinkron
+    // Avoid synchronous setState in useEffect body, perform initial initialization asynchronously
     const initTimeout = setTimeout(() => {
       setIsDesktop(mediaQuery.matches);
     }, 0);
@@ -41,7 +41,7 @@ export default function CustomCursor() {
   }, []);
 
   useEffect(() => {
-    // Jangan jalankan binding event mouse jika bukan di desktop
+    // Do not run mouse event bindings if not on desktop
     if (!isDesktop) return;
 
     let ticking = false;

@@ -28,11 +28,12 @@ export default function Navbar() {
   }, [isOpen]);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md">
+    <>
+      <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
         
         {/* Logo / Brand Name */}
-        <Link href="/" className="text-white text-lg tracking-[0.3em] uppercase font-light z-50">
+        <Link href="/" className="text-white text-lg tracking-[0.3em] uppercase font-light relative z-50">
           BARVILL
         </Link>
 
@@ -68,14 +69,18 @@ export default function Navbar() {
           <span className={`absolute bottom-0 left-0 w-full h-[1px] bg-white transition-transform duration-500 ease-[0.16,1,0.3,1] origin-center ${isOpen ? '-translate-y-[7.5px] -rotate-45' : 'translate-y-0 rotate-0'}`} />
         </button>
       </div>
+      </nav>
 
       {/* Mobile Fullscreen Menu */}
       <div
-        className={`fixed inset-0 bg-black z-40 flex flex-col items-center justify-center transition-all duration-700 ease-[0.16,1,0.3,1] ${
+        className={`fixed inset-0 bg-black z-40 overflow-y-auto transition-all duration-700 ease-[0.16,1,0.3,1] ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="flex flex-col items-center space-y-8">
+        {/* Safe Area Top Spacer: Memaksa browser memberi ruang tanpa peduli flexbox bug */}
+        <div className="w-full h-28 md:h-32 shrink-0" />
+        
+        <div className="w-full flex flex-col items-center justify-start pb-24 gap-6 md:gap-8">
           {navLinks.map((link, index) => {
             const isActive = pathname === link.path;
             return (
@@ -83,10 +88,10 @@ export default function Navbar() {
                 key={link.path}
                 href={link.path}
                 onClick={() => setIsOpen(false)}
-                className={`text-lg tracking-[0.25em] uppercase transition-all duration-500 ease-[0.16,1,0.3,1] pb-1 border-b ${
+                className={`block text-[15px] md:text-lg tracking-[0.25em] uppercase transition-all duration-500 ease-[0.16,1,0.3,1] pb-1 border-b ${
                   isActive
                     ? "text-white border-white"
-                    : "text-neutral-600 border-transparent hover:text-neutral-300"
+                    : "text-neutral-400 border-transparent hover:text-white"
                 } ${
                   isOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
@@ -98,6 +103,6 @@ export default function Navbar() {
           })}
         </div>
       </div>
-    </nav>
+    </>
   );
 }

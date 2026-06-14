@@ -9,6 +9,7 @@ import AmbientAudioWrapper from "@/components/ui/AmbientAudioWrapper";
 import UniverseOverlayWrapper from "@/components/ui/UniverseOverlayWrapper";
 import Footer from "@/components/ui/Footer";
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -121,6 +122,7 @@ export default function RootLayout({
           <Footer />
         </SmoothScroll>
         <GoogleAnalytics gaId="G-MTW3GTNC3" />
+        <Analytics />
       </body>
     </html>
   );
